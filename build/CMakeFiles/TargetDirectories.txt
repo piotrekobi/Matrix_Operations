@@ -1,0 +1,6 @@
+/Users/piotrpaturej/Projekty/intel/matrix_operations/build/CMakeFiles/rebuild_cache.dir
+/Users/piotrpaturej/Projekty/intel/matrix_operations/build/CMakeFiles/edit_cache.dir
+/Users/piotrpaturej/Projekty/intel/matrix_operations/build/src/CMakeFiles/main.dir
+/Users/piotrpaturej/Projekty/intel/matrix_operations/build/src/CMakeFiles/rebuild_cache.dir
+/Users/piotrpaturej/Projekty/intel/matrix_operations/build/src/CMakeFiles/edit_cache.dir
+/Users/piotrpaturej/Projekty/intel/matrix_operations/build/src/CMakeFiles/Matrix.dir
