@@ -79,15 +79,15 @@ include src/CMakeFiles/Matrix.dir/flags.make
 src/CMakeFiles/Matrix.dir/Matrix.cpp.o: src/CMakeFiles/Matrix.dir/flags.make
 src/CMakeFiles/Matrix.dir/Matrix.cpp.o: ../src/Matrix.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/piotrpaturej/Projekty/intel/matrix_operations/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/Matrix.dir/Matrix.cpp.o"
-	cd /Users/piotrpaturej/Projekty/intel/matrix_operations/build/src && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Matrix.dir/Matrix.cpp.o -c /Users/piotrpaturej/Projekty/intel/matrix_operations/src/Matrix.cpp
+	cd /Users/piotrpaturej/Projekty/intel/matrix_operations/build/src && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Matrix.dir/Matrix.cpp.o -c /Users/piotrpaturej/Projekty/intel/matrix_operations/src/Matrix.cpp
 
 src/CMakeFiles/Matrix.dir/Matrix.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Matrix.dir/Matrix.cpp.i"
-	cd /Users/piotrpaturej/Projekty/intel/matrix_operations/build/src && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/piotrpaturej/Projekty/intel/matrix_operations/src/Matrix.cpp > CMakeFiles/Matrix.dir/Matrix.cpp.i
+	cd /Users/piotrpaturej/Projekty/intel/matrix_operations/build/src && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/piotrpaturej/Projekty/intel/matrix_operations/src/Matrix.cpp > CMakeFiles/Matrix.dir/Matrix.cpp.i
 
 src/CMakeFiles/Matrix.dir/Matrix.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Matrix.dir/Matrix.cpp.s"
-	cd /Users/piotrpaturej/Projekty/intel/matrix_operations/build/src && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/piotrpaturej/Projekty/intel/matrix_operations/src/Matrix.cpp -o CMakeFiles/Matrix.dir/Matrix.cpp.s
+	cd /Users/piotrpaturej/Projekty/intel/matrix_operations/build/src && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/piotrpaturej/Projekty/intel/matrix_operations/src/Matrix.cpp -o CMakeFiles/Matrix.dir/Matrix.cpp.s
 
 # Object files for target Matrix
 Matrix_OBJECTS = \

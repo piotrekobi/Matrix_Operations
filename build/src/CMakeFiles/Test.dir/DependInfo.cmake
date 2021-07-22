@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/piotrpaturej/Projekty/intel/matrix_operations/src/main.cpp" "/Users/piotrpaturej/Projekty/intel/matrix_operations/build/src/CMakeFiles/main.dir/main.cpp.o"
+  "/Users/piotrpaturej/Projekty/intel/matrix_operations/src/Test.cpp" "/Users/piotrpaturej/Projekty/intel/matrix_operations/build/src/CMakeFiles/Test.dir/Test.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
@@ -14,7 +14,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/Users/piotrpaturej/Projekty/intel/matrix_operations/build/src/CMakeFiles/Matrix.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

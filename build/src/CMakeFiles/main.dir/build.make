@@ -79,15 +79,15 @@ include src/CMakeFiles/main.dir/flags.make
 src/CMakeFiles/main.dir/main.cpp.o: src/CMakeFiles/main.dir/flags.make
 src/CMakeFiles/main.dir/main.cpp.o: ../src/main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/piotrpaturej/Projekty/intel/matrix_operations/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/main.dir/main.cpp.o"
-	cd /Users/piotrpaturej/Projekty/intel/matrix_operations/build/src && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/main.cpp.o -c /Users/piotrpaturej/Projekty/intel/matrix_operations/src/main.cpp
+	cd /Users/piotrpaturej/Projekty/intel/matrix_operations/build/src && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/main.cpp.o -c /Users/piotrpaturej/Projekty/intel/matrix_operations/src/main.cpp
 
 src/CMakeFiles/main.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/main.cpp.i"
-	cd /Users/piotrpaturej/Projekty/intel/matrix_operations/build/src && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/piotrpaturej/Projekty/intel/matrix_operations/src/main.cpp > CMakeFiles/main.dir/main.cpp.i
+	cd /Users/piotrpaturej/Projekty/intel/matrix_operations/build/src && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/piotrpaturej/Projekty/intel/matrix_operations/src/main.cpp > CMakeFiles/main.dir/main.cpp.i
 
 src/CMakeFiles/main.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/main.cpp.s"
-	cd /Users/piotrpaturej/Projekty/intel/matrix_operations/build/src && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/piotrpaturej/Projekty/intel/matrix_operations/src/main.cpp -o CMakeFiles/main.dir/main.cpp.s
+	cd /Users/piotrpaturej/Projekty/intel/matrix_operations/build/src && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/piotrpaturej/Projekty/intel/matrix_operations/src/main.cpp -o CMakeFiles/main.dir/main.cpp.s
 
 # Object files for target main
 main_OBJECTS = \
@@ -98,6 +98,7 @@ main_EXTERNAL_OBJECTS =
 
 src/main: src/CMakeFiles/main.dir/main.cpp.o
 src/main: src/CMakeFiles/main.dir/build.make
+src/main: src/libMatrix.a
 src/main: src/CMakeFiles/main.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/piotrpaturej/Projekty/intel/matrix_operations/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable main"
 	cd /Users/piotrpaturej/Projekty/intel/matrix_operations/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)

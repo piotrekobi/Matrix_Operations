@@ -7,4 +7,14 @@
 #IncludeRegexTransform: 
 
 /Users/piotrpaturej/Projekty/intel/matrix_operations/src/Matrix.cpp
+Matrix.hpp
+/Users/piotrpaturej/Projekty/intel/matrix_operations/src/Matrix.hpp
+iostream
+-
+vector
+-
+
+/Users/piotrpaturej/Projekty/intel/matrix_operations/src/Matrix.hpp
+vector
+-
 
