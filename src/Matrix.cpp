@@ -38,6 +38,26 @@ template <class type> Matrix<type> Matrix<type>::operator*(const Matrix<type> &A
     return Matrix<type>(this->num_rows, A.num_columns, result_elems);
 }
 
+template <class type> Matrix<type> Matrix<type>::compute_grad(Matrix<type> &A, Matrix<type> &B, Matrix<type> &C)
+{
+    std::vector<Matrix<type>> partial_derivatives;
+
+    for (int i = 0; i < A.num_columns; i++)
+    {
+        std::vector<type> elements(A.num_columns, 0);
+        elements.at(i) = 1;
+        partial_derivatives.push_back(A * Matrix<type>(A.num_columns, 1, elements));
+    }
+
+    for (int i = 0; i < partial_derivatives.size(); i++)
+    {
+        partial_derivatives.at(i).print_matrix();
+        std::cout << std::endl;
+    }
+
+    return partial_derivatives.at(0); // placeholder
+}
+
 template <class type> bool Matrix<type>::operator==(const Matrix<type> &A)
 {
     return ((this->num_columns == A.num_columns) && (this->num_rows == A.num_rows) && (this->elements == A.elements));

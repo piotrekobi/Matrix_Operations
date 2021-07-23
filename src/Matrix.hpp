@@ -8,6 +8,8 @@ template <class type> class Matrix
   public:
     Matrix(int rows, int columns, std::vector<type> elems);
     Matrix<type> operator*(const Matrix &);
+    static Matrix<type> compute_grad(Matrix<type> &A, Matrix<type> &B, Matrix<type> &C);
+
     bool operator==(const Matrix &);
     void print_matrix();
 };
