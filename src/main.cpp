@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 
-int main(int argc, char const *argv[])
+int main()
 {
     Matrix<float> A(1, 3, {1, 2.6, 3});
     Matrix<float> B(3, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9});
@@ -15,5 +15,7 @@ int main(int argc, char const *argv[])
     // B.print_matrix();
     Matrix<float> C = A * B;
     C.print_matrix();
+    std::cout << (C == A) << std::endl;
+    std::cout << (C == A * B) << std::endl;
     return 0;
 }

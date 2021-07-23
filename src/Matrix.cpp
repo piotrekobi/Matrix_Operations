@@ -38,9 +38,14 @@ template <class type> Matrix<type> Matrix<type>::operator*(const Matrix<type> &A
     return Matrix<type>(this->num_rows, A.num_columns, result_elems);
 }
 
+template <class type> bool Matrix<type>::operator==(const Matrix<type> &A)
+{
+    return ((this->num_columns == A.num_columns) && (this->num_rows == A.num_rows) && (this->elements == A.elements));
+}
+
 template <class type> void Matrix<type>::print_matrix()
 {
-    for (int i = 0; i < elements.size(); i++)
+    for (unsigned int i = 0; i < elements.size(); i++)
     {
         std::cout << elements.at(i) << " ";
         if ((i + 1) % num_columns == 0)
