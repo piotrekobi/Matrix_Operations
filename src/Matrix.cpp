@@ -58,9 +58,15 @@ template <class type> Matrix<type> Matrix<type>::compute_grad(Matrix<type> &A, M
     return partial_derivatives.at(0); // placeholder
 }
 
+template <class type> bool Matrix<type>::floating_point_compare(const type &x, const type &y)
+{
+    return abs(x - y) < 0.00001;
+}
+
 template <class type> bool Matrix<type>::operator==(const Matrix<type> &A)
 {
-    return ((this->num_columns == A.num_columns) && (this->num_rows == A.num_rows) && (this->elements == A.elements));
+    return ((this->num_columns == A.num_columns) && (this->num_rows == A.num_rows) &&
+            (std::equal(this->elements.begin(), this->elements.end(), A.elements.begin(), floating_point_compare)));
 }
 
 template <class type> void Matrix<type>::print_matrix()

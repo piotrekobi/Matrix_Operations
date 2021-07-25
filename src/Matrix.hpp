@@ -4,6 +4,7 @@ template <class type> class Matrix
 {
     unsigned int num_rows, num_columns;
     std::vector<type> elements;
+    static bool floating_point_compare(const type &, const type &);
 
   public:
     Matrix(int rows, int columns, std::vector<type> elems);
