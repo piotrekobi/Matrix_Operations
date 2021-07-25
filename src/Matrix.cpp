@@ -72,3 +72,6 @@ template <class type> void Matrix<type>::print_matrix()
             std::cout << std::endl;
     }
 }
+
+template class Matrix<float>;
+template class Matrix<double>;
