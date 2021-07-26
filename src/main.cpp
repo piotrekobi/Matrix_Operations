@@ -4,11 +4,18 @@
 
 int main()
 {
-    Matrix<float> A(3, 2, {1, 2, 3, 4, 5, 6});
-    Matrix<float> B(2, 1, {1, 2});
-    Matrix<float> C(1, 1, {1});
+    // CONST
+    // CONST
+    // CONST
+    // CONST
 
-    Matrix<float>::compute_grad(A, B, C);
+    Matrix<float> A(3, 2, {1, 2, 3, 4, 5, 6});
+    // Matrix<float> B(2, 1, {1, 2});
+    // Matrix<float> C(1, 1, {1});
+    Matrix<float> D(2, 4, {1, 2, 3, 4, 5, 6, 7, 8});
+
+    // (A * D).print_matrix();
+    Matrix<float>::compute_grad(A, D, A).print_matrix();
 
     // Matrix<float> A(1, 3, {1, 2.6, 3});
     // Matrix<float> B(3, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9});
