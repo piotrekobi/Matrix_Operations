@@ -10,9 +10,11 @@ template <class type> class Matrix
     static std::vector<type> compute_gradient_elements(Matrix<type> &A, Matrix<type> &B, Matrix<type> &C,
                                                        std::vector<Matrix<type>> partial_derivatives);
     static void fill_elements_C_equal_A(std::vector<type> &gradient_elements,
-                                        std::vector<Matrix<type>> partial_derivatives, Matrix<type> &B);
+                                        std::vector<Matrix<type>> partial_derivatives, Matrix<type> &B,
+                                        type row_sums[]);
     static void fill_elements_C_equal_B(std::vector<type> &gradient_elements,
                                         std::vector<Matrix<type>> partial_derivatives, Matrix<type> &B, const int i);
+    static void fill_row_sums(type row_sums[], std::vector<Matrix<type>> partial_derivatives);
 
   public:
     Matrix(int rows, int columns, std::vector<type> elems);

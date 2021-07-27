@@ -64,21 +64,25 @@ std::vector<Matrix<type>> Matrix<type>::compute_partial_derivatives(Matrix<type>
     return partial_derivatives;
 }
 
-template <class type>
-void Matrix<type>::fill_elements_C_equal_A(std::vector<type> &gradient_elements,
-                                           std::vector<Matrix<type>> partial_derivatives, Matrix<type> &B)
+template <class type> void Matrix<type>::fill_row_sums(type row_sums[], std::vector<Matrix<type>> partial_derivatives)
 {
-    type row_sums[partial_derivatives.size()];
-    for (int j = 0; j < B.num_columns; j++)
+    for (int j = 0; j < partial_derivatives.at(0).elements.size(); j++)
     {
         type row_sum = 0;
         for (int k = 0; k < partial_derivatives.size(); k++)
             row_sum += partial_derivatives.at(k).elements.at(j);
         row_sums[j] = row_sum;
     }
+}
+
+template <class type>
+void Matrix<type>::fill_elements_C_equal_A(std::vector<type> &gradient_elements,
+                                           std::vector<Matrix<type>> partial_derivatives, Matrix<type> &B,
+                                           type row_sums[])
+{
     for (int j = 0; j < B.num_columns; j++)
     {
-        gradient_elements.push_back(row_sums[j % B.num_columns]);
+        gradient_elements.push_back(row_sums[j]);
     }
 }
 
@@ -98,6 +102,12 @@ std::vector<type> Matrix<type>::compute_gradient_elements(Matrix<type> &A, Matri
                                                           std::vector<Matrix<type>> partial_derivatives)
 {
     std::vector<type> gradient_elements;
+    type row_sums[partial_derivatives.size()];
+    if (C == A)
+    {
+        fill_row_sums(row_sums, partial_derivatives);
+    }
+
     for (int i = 0; i < A.num_rows; i++)
     {
         if (C == B)
@@ -106,7 +116,7 @@ std::vector<type> Matrix<type>::compute_gradient_elements(Matrix<type> &A, Matri
         }
         else
         {
-            fill_elements_C_equal_A(gradient_elements, partial_derivatives, B);
+            fill_elements_C_equal_A(gradient_elements, partial_derivatives, B, row_sums);
         }
     }
     return gradient_elements;
