@@ -1,10 +1,11 @@
 #include "Matrix.hpp"
+#include <iomanip>
 #include <iostream>
 #include <stdexcept>
 #include <vector>
 
 template <class type>
-Matrix<type>::Matrix(int rows, int columns, std::vector<type> elems)
+Matrix<type>::Matrix(const int rows, const int columns, const std::vector<type> elems)
     : num_rows(rows), num_columns(columns), elements(elems)
 {
     if (elems.size() != rows * columns)
@@ -43,7 +44,8 @@ template <class type> Matrix<type> Matrix<type>::operator*(const Matrix<type> &A
 }
 
 template <class type>
-std::vector<Matrix<type>> Matrix<type>::compute_partial_derivatives(Matrix<type> &A, Matrix<type> &B, Matrix<type> &C)
+std::vector<Matrix<type>> Matrix<type>::compute_partial_derivatives(Matrix<type> &A, Matrix<type> &B,
+                                                                    const bool right_derivative)
 {
     int num_partial_derivatives = A.num_columns;
     std::vector<Matrix<type>> partial_derivatives;
@@ -52,7 +54,7 @@ std::vector<Matrix<type>> Matrix<type>::compute_partial_derivatives(Matrix<type>
     {
         std::vector<type> elements(num_partial_derivatives, 0);
         elements.at(i) = 1;
-        if (C == B)
+        if (right_derivative)
         {
             partial_derivatives.push_back(A * Matrix<type>(A.num_columns, 1, elements));
         }
@@ -64,60 +66,54 @@ std::vector<Matrix<type>> Matrix<type>::compute_partial_derivatives(Matrix<type>
     return partial_derivatives;
 }
 
-template <class type> void Matrix<type>::fill_row_sums(type row_sums[], std::vector<Matrix<type>> partial_derivatives)
+template <class type>
+void Matrix<type>::fill_row_sums(std::vector<type> &row_sums, std::vector<Matrix<type>> partial_derivatives)
 {
-    for (int j = 0; j < partial_derivatives.at(0).elements.size(); j++)
+    for (int num_column = 0; num_column < partial_derivatives.at(0).elements.size(); num_column++)
     {
         type row_sum = 0;
-        for (int k = 0; k < partial_derivatives.size(); k++)
-            row_sum += partial_derivatives.at(k).elements.at(j);
-        row_sums[j] = row_sum;
+        for (int num_row = 0; num_row < partial_derivatives.size(); num_row++)
+            row_sum += partial_derivatives.at(num_row).elements.at(num_column);
+        row_sums.push_back(row_sum);
     }
 }
 
 template <class type>
-void Matrix<type>::fill_elements_C_equal_A(std::vector<type> &gradient_elements,
-                                           std::vector<Matrix<type>> partial_derivatives, Matrix<type> &B,
-                                           type row_sums[])
+void Matrix<type>::fill_elements_C_equal_A(std::vector<type> &gradient_elements, const std::vector<type> &row_sums,
+                                           const int num_columns)
 {
-    for (int j = 0; j < B.num_columns; j++)
-    {
-        gradient_elements.push_back(row_sums[j]);
-    }
+    for (int num_column = 0; num_column < num_columns; num_column++)
+        gradient_elements.push_back(row_sums.at(num_column));
 }
 
 template <class type>
 void Matrix<type>::fill_elements_C_equal_B(std::vector<type> &gradient_elements,
-                                           std::vector<Matrix<type>> partial_derivatives, Matrix<type> &B, int i)
+                                           std::vector<Matrix<type>> partial_derivatives, const int num_columns,
+                                           const int current_row)
 {
     type column_sum = 0;
-    for (int j = 0; j < B.num_rows; j++)
-        column_sum += partial_derivatives.at(j).elements.at(i);
-    for (int j = 0; j < B.num_columns; j++)
+    for (int num_partial_derivative = 0; num_partial_derivative < partial_derivatives.size(); num_partial_derivative++)
+        column_sum += partial_derivatives.at(num_partial_derivative).elements.at(current_row);
+    for (int num_column = 0; num_column < num_columns; num_column++)
         gradient_elements.push_back(column_sum);
 }
 
 template <class type>
-std::vector<type> Matrix<type>::compute_gradient_elements(Matrix<type> &A, Matrix<type> &B, Matrix<type> &C,
-                                                          std::vector<Matrix<type>> partial_derivatives)
+std::vector<type> Matrix<type>::compute_gradient_elements(const std::vector<Matrix<type>> partial_derivatives,
+                                                          const int num_columns, const int num_rows,
+                                                          const bool right_derivative)
 {
     std::vector<type> gradient_elements;
-    type row_sums[partial_derivatives.size()];
-    if (C == A)
-    {
+    std::vector<type> row_sums;
+    if (!right_derivative)
         fill_row_sums(row_sums, partial_derivatives);
-    }
 
-    for (int i = 0; i < A.num_rows; i++)
+    for (int current_row = 0; current_row < num_rows; current_row++)
     {
-        if (C == B)
-        {
-            fill_elements_C_equal_B(gradient_elements, partial_derivatives, B, i);
-        }
+        if (right_derivative)
+            fill_elements_C_equal_B(gradient_elements, partial_derivatives, num_columns, current_row);
         else
-        {
-            fill_elements_C_equal_A(gradient_elements, partial_derivatives, B, row_sums);
-        }
+            fill_elements_C_equal_A(gradient_elements, row_sums, num_columns);
     }
     return gradient_elements;
 }
@@ -125,13 +121,13 @@ std::vector<type> Matrix<type>::compute_gradient_elements(Matrix<type> &A, Matri
 template <class type> Matrix<type> Matrix<type>::compute_grad(Matrix<type> &A, Matrix<type> &B, Matrix<type> &C)
 {
     if (!(C == A) and !(C == B))
-    {
         throw std::invalid_argument("The gradient matrix must be either the first or the second multiplied matrix");
-    }
 
     check_multiplication_possibility(A, B);
-    std::vector<Matrix<type>> partial_derivatives = compute_partial_derivatives(A, B, C);
-    std::vector<type> gradient_elements = compute_gradient_elements(A, B, C, partial_derivatives);
+    bool right_derivative = (C == B);
+    std::vector<Matrix<type>> partial_derivatives = compute_partial_derivatives(A, B, right_derivative);
+    std::vector<type> gradient_elements =
+        compute_gradient_elements(partial_derivatives, B.num_columns, A.num_rows, right_derivative);
 
     return Matrix<type>(A.num_rows, B.num_columns, gradient_elements);
 }
@@ -149,12 +145,13 @@ template <class type> bool Matrix<type>::operator==(const Matrix<type> &A)
 
 template <class type> void Matrix<type>::print_matrix()
 {
-    for (unsigned int i = 0; i < elements.size(); i++)
+    for (int current_element = 0; current_element < elements.size(); current_element++)
     {
-        std::cout << elements.at(i) << " ";
-        if ((i + 1) % num_columns == 0)
+        std::cout << std::setw(4) << elements.at(current_element) << " ";
+        if ((current_element + 1) % num_columns == 0)
             std::cout << std::endl;
     }
+    std::cout << std::endl;
 }
 
 template class Matrix<float>;
