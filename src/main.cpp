@@ -8,6 +8,7 @@ int main()
     Matrix<float> B(4, 4, {17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32});
 
     (A * B).print_matrix();
+    (B * A).print_matrix();
     Matrix<float>::compute_grad(A, B, B).print_matrix();
     Matrix<float>::compute_grad(A, B, A).print_matrix();
 
